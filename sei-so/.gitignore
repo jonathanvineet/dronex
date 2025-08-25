@@ -1,3 +1,30 @@
-node_modules
+# Node dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
 .env
-.env.new
+
+# OS files
+.DS_Store
+
+# Vercel deployment
+.vercel/
+
+# IDE files
+.vscode/
+.idea/
+
+# Coverage reports
+coverage/
+
+# Misc
