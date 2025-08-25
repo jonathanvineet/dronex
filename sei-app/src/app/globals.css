@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+/* Futuristic Dark Drone Theme Tokens */
+:root {
+  /* Base colors (HSL where possible) */
+  --background: #0a0a0a;
+  --foreground: #f5f5f5;
+
+  /* Drone theme tokens (HSL numeric values to enable hsla ops) */
+  --drone-steel: 0 0% 18%;
+  --drone-charcoal: 220 9% 17%;
+  --drone-graphite: 220 13% 11%;
+  --drone-highlight: 0 0% 85%;
+
+  --card: 0 0% 8%;
+  --card-foreground: 0 0% 95%;
+  --border: 0 0% 15%;
+
+  /* Gradients */
+  --gradient-drone: linear-gradient(135deg, hsl(220 9% 17%), hsl(0 0% 8%), hsl(220 13% 11%));
+  --gradient-glass: linear-gradient(135deg, hsla(0 0% 15% / 0.30), hsla(0 0% 8% / 0.60));
+  --gradient-border: linear-gradient(135deg, hsla(0 0% 25% / 0.50), hsla(0 0% 15% / 0.30));
+
+  /* Shadows */
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.40);
+  --shadow-glow: 0 0 20px rgba(255, 255, 255, 0.10);
+  --shadow-inner: inset 0 1px 0 rgba(255, 255, 255, 0.10);
+
+  /* Radii */
+  --radius: 12px;
+
+  /* Font vars populated by next/font */
+  --font-orbitron: "Orbitron", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-russo: "Russo One", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-inter: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Typography utility classes */
+.font-orbitron {
+  font-family: var(--font-orbitron);
+}
+.font-russo {
+  font-family: var(--font-russo);
+}
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+/* Base */
+html, body {
+  height: 100%;
+}
+body {
+  background: #0a0a0a;
+  color: var(--foreground);
+  font-family: var(--font-inter);
+}
+
+/* Glassmorphism panels */
+.hud-card {
+  background: var(--gradient-glass);
+  border: 1px solid hsl(var(--border));
+  box-shadow: var(--shadow-glass), var(--shadow-inner);
+  border-radius: var(--radius);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* Gradient border helper (subtle) */
+.border-gradient {
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 0 0 1px hsla(0 0% 100% / 0.04) inset;
+}
+
+/* Shadows */
+.shadow-glass { box-shadow: var(--shadow-glass); }
+.shadow-glow { box-shadow: var(--shadow-glow); }
+
+/* Themed colors */
+.text-drone-highlight { color: hsl(var(--drone-highlight)); }
+.border-drone-charcoal { border-color: hsl(var(--drone-charcoal)); }
+.bg-drone-graphite { background-color: hsl(var(--drone-graphite)); }
+.bg-drone-graphite-50 { background-color: hsla(var(--drone-graphite) / 0.5); }
+.bg-gradient-glass { background: var(--gradient-glass); }
+
+/* Primary button */
+.btn-drone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background-image: linear-gradient(90deg, hsl(var(--drone-steel)), hsl(var(--drone-charcoal)));
+  color: #fff;
+  border: 1px solid hsla(0 0% 100% / 0.08);
+  box-shadow: var(--shadow-glow);
+  transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease, background-position 300ms ease;
+  background-size: 200% 100%;
+}
+.btn-drone:hover {
+  background-position: 100% 0;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.12));
+}
+
+/* Hero and HUD animations */
+@keyframes float-slow {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float { animation: float-slow 4s ease-in-out infinite; }
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in { animation: fade-in 800ms ease forwards; }
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slide-up 700ms ease forwards; }
+
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.animate-bounce-soft { animation: bounce-soft 2s ease-in-out infinite; }
+
+/* Map grid pulsing */
+.map-grid {
+  position: relative;
+  background-color: #0b0b0b;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px;
+}
+@keyframes grid-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.8; }
+}
+.animate-grid-pulse { animation: grid-pulse 3s ease-in-out infinite; }
+
+/* Tailwind v4 color bridge for utility classes (bg-background, text-foreground, etc.) */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-drone-highlight: hsl(var(--drone-highlight));
+  --color-drone-charcoal: hsl(var(--drone-charcoal));
+  --color-drone-graphite: hsl(var(--drone-graphite));
+  --font-sans: var(--font-inter);
+}
+
