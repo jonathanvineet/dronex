@@ -31,7 +31,7 @@ export default function ElizaOSDroneDisplay({ orderId, onDataUpdate }) {
 		fetchData();
 		const iv = setInterval(fetchData, 5000);
 		return () => { mounted = false; clearInterval(iv); };
-	}, [orderId, onDataUpdate]);
+	}, [orderId, onDataUpdate, backend]);
 
 	return (
 		<div className="bg-drone-charcoal/30 rounded-lg p-4">

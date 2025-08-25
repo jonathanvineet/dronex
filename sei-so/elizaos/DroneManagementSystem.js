@@ -5,6 +5,14 @@ const WebSocket = require('ws');
 
 class DroneManagementSystem {
   constructor() {
+    // Singleton pattern to prevent multiple WebSocket servers
+    if (DroneManagementSystem.instance) {
+      return DroneManagementSystem.instance;
+    }
+    
+    // Store the instance immediately to prevent multiple instantiations
+    DroneManagementSystem.instance = this;
+    
     this.wss = null;
     
     // Mock drone fleet with SEI wallet addresses and realistic nearby locations (within 10km radius)
@@ -106,7 +114,8 @@ class DroneManagementSystem {
     this.activeJobs = new Map();
     this.elizaAgent = null;
     this.initializeEliza();
-    this.setupWebSocket();
+    // Don't start WebSocket server during construction to avoid port conflicts during build
+    // It will be started lazily when first needed
   }
 
     /**
@@ -139,6 +148,12 @@ class DroneManagementSystem {
     }
 
   setupWebSocket() {
+    // Only create WebSocket server if it doesn't exist
+    if (this.wss) {
+      console.log('🔌 WebSocket server already running on port 8080');
+      return;
+    }
+    
     try {
       this.wss = new WebSocket.Server({ port: 8080 });
       console.log('🔌 WebSocket server started on port 8080');
@@ -152,12 +167,23 @@ class DroneManagementSystem {
         });
       });
     } catch (error) {
-      console.error('Error setting up WebSocket server:', error);
+      if (error.code === 'EADDRINUSE') {
+        console.log('🔌 WebSocket port 8080 already in use, skipping WebSocket server creation');
+        // Set wss to a mock object to prevent further attempts
+        this.wss = { clients: new Set() };
+      } else {
+        console.error('Error setting up WebSocket server:', error);
+      }
     }
   }
 
   broadcastUpdate(data) {
-    if (!this.wss) return;
+    // Lazy initialize WebSocket server if needed
+    if (!this.wss) {
+      this.setupWebSocket();
+    }
+    
+    if (!this.wss || !this.wss.clients) return;
     
     this.wss.clients.forEach(client => {
       if (client.readyState === WebSocket.OPEN) {

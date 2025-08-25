@@ -838,7 +838,7 @@ export default function PaymentPage() {
               {/* Manual Payment Fallback */}
               <div className="mt-4 p-4 bg-drone-charcoal/20 border border-drone-charcoal rounded-lg">
                 <h4 className="font-bold text-white mb-2">Manual Payment (fallback)</h4>
-                <p className="text-sm text-gray-300 mb-3">If your wallet doesn't prompt, copy the shop address below, perform the SEI transfer from your wallet, then paste the transaction hash here.</p>
+                <p className="text-sm text-gray-300 mb-3">If your wallet does not prompt, copy the shop address below, perform the SEI transfer from your wallet, then paste the transaction hash here.</p>
                 <div className="mb-3">
                   <label className="text-xs text-gray-400">Shop (Bech32) Address</label>
                   <div className="mt-1 flex items-center gap-2">

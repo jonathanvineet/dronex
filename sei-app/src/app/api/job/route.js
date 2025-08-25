@@ -1,7 +1,7 @@
 // Next.js API route for job management
 import { NextResponse } from 'next/server';
 import { ethers } from 'ethers';
-import CONTRACT_JSON from '../../../../../../sei-so/artifacts/contracts/DeliveryEscrow.sol/DeliveryEscrow.json';
+import CONTRACT_JSON from '../../../../../../dronex/sei-so/artifacts/contracts/DeliveryEscrow.sol/DeliveryEscrow.json';
 
 const CONTRACT_ABI = CONTRACT_JSON.abi;
 const CONTRACT_ADDRESS = "0x233D7487e447248DF9f71C6db46e8454254EB808";

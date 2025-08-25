@@ -1,6 +1,6 @@
 // Next.js API route for drones management
 import { NextResponse } from 'next/server';
-import DroneManagementSystem from '../../../../../../sei-so/elizaos/DroneManagementSystem';
+import DroneManagementSystem from '../../../../../../dronex/sei-so/elizaos/DroneManagementSystem';
 
 const droneSystem = new DroneManagementSystem();
 
