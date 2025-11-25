@@ -228,12 +228,3 @@ Coding style: follow existing project conventions in `sei-app` and `sei-so`.
 
 Add a `LICENSE` file to this repo if you plan to publish. If you want a permissive license, consider `MIT`.
 
----
-
-If you'd like, I can:
-
-- Add badges (build, tests) to this `README.md`.
-- Create a `CONTRIBUTING.md` or `LICENSE` file.
-- Tailor the Quick Start commands to use `pnpm` or a specific Node version manager.
-
-Tell me which of those you'd like next.
