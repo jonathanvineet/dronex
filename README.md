@@ -1,5 +1,7 @@
  # Dronex
 
+Delivering the future, block by block.
+
 A full-stack demo for drone delivery orchestration, on-chain escrow and simulation tools.
 
 This repository contains two main parts:
